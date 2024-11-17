@@ -22,6 +22,10 @@
         .tab-content {
             margin-top: 20px;
         }
+
+        #teamsView {
+            display: none;
+        }
     </style>
 </head>
 
@@ -53,14 +57,13 @@
                 <div class="mt-4">
                     <h2>Registro de Equipos</h2>
                     <form id="registerForm" class="bg-white p-4 rounded shadow-sm">
-                        <h4 class="mb-3 text-center">Registrar Equipo</h4>
                         <div class="mb-3">
                             <label for="teamName" class="form-label">Nombre del Equipo:</label>
                             <input type="text" class="form-control" id="teamName" name="teamName" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="captain" class="form-label">Capitán del Equipo:</label>
+                            <label for="captain" class="form-label">Nombre del Capitán:</label>
                             <input type="text" class="form-control" id="captain" name="captain" required>
                         </div>
 
@@ -71,8 +74,23 @@
 
                         <button type="submit" class="btn btn-primary w-100">Registrar Equipo</button>
                     </form>
+
+                    <div id="message" class="text-center mt-3"></div>
                 </div>
             </div>
+        </div>
+
+        <!-- Botón para ver los equipos registrados -->
+        <div class="row justify-content-center mt-4">
+            <button id="showTeamsBtn" class="btn btn-info">Ver Equipos Registrados</button>
+        </div>
+
+        <!-- Vista de equipos registrados -->
+        <div id="teamsView" class="mt-4">
+            <h3 class="text-center">Equipos Registrados</h3>
+            <ul id="teamsList" class="list-group">
+                <!-- Los equipos se cargarán aquí dinámicamente -->
+            </ul>
         </div>
     </div>
 
@@ -120,7 +138,7 @@
             });
         }
 
-        // Mostrar los equipos cuando se haga clic en el botón "Equipos Registrados"
+        // Mostrar los equipos cuando se haga clic en el botón "Ver Equipos Registrados"
         document.getElementById('showTeamsBtn').addEventListener('click', () => {
             const teamsView = document.getElementById('teamsView');
             teamsView.style.display = teamsView.style.display === 'none' ? 'block' : 'none';  // Alternar visibilidad
