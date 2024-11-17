@@ -1,59 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Torneos de League of Legends</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Torneo de League of Legends</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input {
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Torneos de League of Legends</h1>
-        <nav>
-            <a href="#inicio">Inicio</a>
-            <a href="#inscripcion">Inscripción</a>
-            <a href="#bracket">Bracket</a>
-            <a href="#contacto">Contacto</a>
-        </nav>
-    </header>
-    
-    <section id="inicio">
-        <h2>¡Bienvenido al Torneo!</h2>
-        <p>Participa en el torneo más emocionante de League of Legends. Inscribe a tu equipo y compite por grandes premios.</p>
-    </section>
-    
-    <section id="inscripcion">
-        <h2>Inscripción</h2>
-        <form id="registroForm">
-            <label for="teamName">Nombre del equipo:</label>
-            <input type="text" id="teamName" name="teamName" required>
-            
-            <label for="captain">Capitán del equipo:</label>
-            <input type="text" id="captain" name="captain" required>
-            
-            <label for="email">Correo electrónico:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <button type="submit">Registrar</button>
-        </form>
-        <p id="confirmationMessage"></p>
-    </section>
-    
-    <section id="bracket">
-        <h2>Bracket del Torneo</h2>
-        <p>Próximamente se mostrarán aquí los avances del torneo.</p>
-    </section>
-    
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <p>Para cualquier duda, envíanos un correo a <a href="mailto:contacto@torneolol.com">contacto@torneolol.com</a>.</p>
-    </section>
-    
-    <footer>
-        <p>&copy; 2024 Torneos LoL. Todos los derechos reservados.</p>
-    </footer>
-    
-    <script src="script.js"></script>
+    <h1>Bienvenido al Torneo de League of Legends</h1>
+
+    <!-- Formulario de Registro de Equipo -->
+    <form id="registerForm">
+        <label for="teamName">Nombre del Equipo:</label>
+        <input type="text" id="teamName" name="teamName" required>
+
+        <label for="captain">Capitán del Equipo:</label>
+        <input type="text" id="captain" name="captain" required>
+
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" id="email" name="email" required>
+
+        <button type="submit">Registrar Equipo</button>
+    </form>
+
+    <div id="message"></div>
+
+    <h2>Equipos Registrados</h2>
+    <ul id="teamsList"></ul>
+
+    <script>
+        // Manejo del formulario para registrar un equipo
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const teamName = document.getElementById('teamName').value;
+            const captain = document.getElementById('captain').value;
+            const email = document.getElementById('email').value;
+
+            const response = await fetch('http://localhost:5000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ teamName, captain, email }),
+            });
+
+            const message = await response.text();
+            document.getElementById('message').textContent = message;
+
+            // Opcional: Reiniciar el formulario después de enviar
+            document.getElementById('registerForm').reset();
+            getTeams(); // Actualiza la lista de equipos registrados
+        });
+
+        // Obtener y mostrar los equipos registrados
+        async function getTeams() {
+            const response = await fetch('http://localhost:5000/teams');
+            const teams = await response.json();
+            const teamsList = document.getElementById('teamsList');
+            teamsList.innerHTML = '';  // Limpiar la lista antes de agregar nuevos equipos
+
+            teams.forEach(team => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${team.teamName} (Capitán: ${team.captain})`;
+                teamsList.appendChild(listItem);
+            });
+        }
+
+        // Cargar los equipos al cargar la página
+        getTeams();
+    </script>
 </body>
 </html>
+
 
