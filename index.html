@@ -3,40 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Web</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
-        header {
-            background: #007bff;
-            color: white;
-            padding: 1em 0;
-        }
-        main {
-            padding: 2em;
-        }
-        footer {
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: #555;
-        }
-    </style>
+    <title>Torneos de League of Legends</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>¡Bienvenido a mi página web!</h1>
+        <h1>Torneos de League of Legends</h1>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#inscripcion">Inscripción</a>
+            <a href="#bracket">Bracket</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
     </header>
-    <main>
-        <p>Esta es una página básica creada con HTML y CSS.</p>
-        <p>Puedes personalizarla como quieras.</p>
-    </main>
+    
+    <section id="inicio">
+        <h2>¡Bienvenido al Torneo!</h2>
+        <p>Participa en el torneo más emocionante de League of Legends. Inscribe a tu equipo y compite por grandes premios.</p>
+    </section>
+    
+    <section id="inscripcion">
+        <h2>Inscripción</h2>
+        <form id="registroForm">
+            <label for="teamName">Nombre del equipo:</label>
+            <input type="text" id="teamName" name="teamName" required>
+            
+            <label for="captain">Capitán del equipo:</label>
+            <input type="text" id="captain" name="captain" required>
+            
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <button type="submit">Registrar</button>
+        </form>
+        <p id="confirmationMessage"></p>
+    </section>
+    
+    <section id="bracket">
+        <h2>Bracket del Torneo</h2>
+        <p>Próximamente se mostrarán aquí los avances del torneo.</p>
+    </section>
+    
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Para cualquier duda, envíanos un correo a <a href="mailto:contacto@torneolol.com">contacto@torneolol.com</a>.</p>
+    </section>
+    
     <footer>
-        <p>&copy; 2024 - Tu Nombre</p>
+        <p>&copy; 2024 Torneos LoL. Todos los derechos reservados.</p>
     </footer>
+    
+    <script src="script.js"></script>
 </body>
 </html>
+
