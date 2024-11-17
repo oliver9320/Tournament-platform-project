@@ -15,6 +15,12 @@
             display: block;
             margin: 10px 0;
         }
+        #teamsList {
+            margin-top: 20px;
+        }
+        #teamsView {
+            display: none; /* Inicialmente ocultamos la lista de equipos */
+        }
     </style>
 </head>
 <body>
@@ -36,8 +42,14 @@
 
     <div id="message"></div>
 
-    <h2>Equipos Registrados</h2>
-    <ul id="teamsList"></ul>
+    <!-- Botón para ver los equipos registrados -->
+    <button id="showTeamsBtn">Equipos Registrados</button>
+
+    <!-- Vista de equipos registrados (ocultada por defecto) -->
+    <div id="teamsView">
+        <h2>Equipos Registrados</h2>
+        <ul id="teamsList"></ul>
+    </div>
 
     <script>
         // Manejo del formulario para registrar un equipo
@@ -61,10 +73,9 @@
 
             // Opcional: Reiniciar el formulario después de enviar
             document.getElementById('registerForm').reset();
-            getTeams(); // Actualiza la lista de equipos registrados
         });
 
-        // Obtener y mostrar los equipos registrados
+        // Función para obtener y mostrar los equipos registrados
         async function getTeams() {
             const response = await fetch('http://localhost:5000/teams');
             const teams = await response.json();
@@ -78,10 +89,17 @@
             });
         }
 
-        // Cargar los equipos al cargar la página
-        getTeams();
+        // Mostrar los equipos cuando se haga clic en el botón "Equipos Registrados"
+        document.getElementById('showTeamsBtn').addEventListener('click', () => {
+            const teamsView = document.getElementById('teamsView');
+            teamsView.style.display = teamsView.style.display === 'none' ? 'block' : 'none';  // Alternar visibilidad
+
+            // Si se va a mostrar la lista de equipos, actualizarla
+            if (teamsView.style.display === 'block') {
+                getTeams();
+            }
+        });
     </script>
 </body>
 </html>
-
 
