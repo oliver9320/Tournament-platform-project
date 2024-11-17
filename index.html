@@ -80,11 +80,6 @@
             </div>
         </div>
 
-        <!-- Botón para ver los equipos registrados -->
-        <div class="row justify-content-center mt-4">
-            <button id="showTeamsBtn" class="btn btn-info">Ver Equipos Registrados</button>
-        </div>
-
         <!-- Vista de equipos registrados -->
         <div id="teamsView" class="mt-4">
             <h3 class="text-center">Equipos Registrados</h3>
@@ -138,10 +133,7 @@
             });
         }
 
-        // Mostrar los equipos cuando se haga clic en el botón "Ver Equipos Registrados"
-        document.getElementById('showTeamsBtn').addEventListener('click', () => {
-            const teamsView = document.getElementById('teamsView');
-            teamsView.style.display = teamsView.style.display === 'none' ? 'block' : 'none';  // Alternar visibilidad
+    
 
             // Si se va a mostrar la lista de equipos, actualizarla
             if (teamsView.style.display === 'block') {
