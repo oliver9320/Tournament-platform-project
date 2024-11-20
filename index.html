@@ -11,8 +11,8 @@
 
     <style>
         body {
-            background: linear-gradient(to right, #141e30, #243b55);
-            color: white;
+            background-color: white; /* Fondo blanco */
+            color: #333; /* Texto oscuro */
             font-family: Arial, sans-serif;
         }
 
@@ -25,7 +25,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            width: 100px;
+            width: 80px; /* Logo más pequeño */
             height: auto;
         }
 
@@ -34,9 +34,10 @@
         }
 
         #registerForm {
-            background-color: #1c2833;
+            background-color: #f8f9fa; /* Fondo claro del formulario */
             padding: 20px;
             border-radius: 10px;
+            border: 1px solid #ddd; /* Borde gris claro */
         }
 
         .nav-tabs {
@@ -49,6 +50,17 @@
 
         #teamsView {
             display: none;
+        }
+
+        /* Botón primario adaptado */
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
         }
     </style>
 </head>
@@ -152,5 +164,4 @@
 </body>
 
 </html>
-
 
