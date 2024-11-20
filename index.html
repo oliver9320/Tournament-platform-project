@@ -13,14 +13,38 @@
         body {
             background: linear-gradient(to right, #141e30, #243b55);
             color: white;
+            font-family: Arial, sans-serif;
         }
 
         .container {
-            margin-top: 50px;
+            margin-top: 30px;
+            max-width: 900px;
+        }
+
+        .top-right-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 100px;
+            height: auto;
         }
 
         .tab-content {
             margin-top: 20px;
+        }
+
+        #registerForm {
+            background-color: #1c2833;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .nav-tabs {
+            justify-content: center;
+        }
+
+        h1, h2 {
+            text-align: center;
         }
 
         #teamsView {
@@ -30,8 +54,15 @@
 </head>
 
 <body>
-    <img src="Logo.png" class="top-right-image" alt="Imagen Logo">
+    <!-- Logo -->
+    <img src="Logo.png" class="top-right-image" alt="Logo del torneo">
+
+    <!-- Contenedor principal -->
     <div class="container">
+        <!-- Título -->
+        <h1>Plataforma de Torneos</h1>
+        <p class="text-center">¡Prepárate para desafiar a otros equipos y convertirte en el campeón!</p>
+
         <!-- Barra de navegación con pestañas -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -47,9 +78,10 @@
             <!-- Vista de Inicio -->
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="mt-4">
-                    <h1>Bienvenidos a la Plataforma de Torneos de League of Legends</h1>
-                    <p>¡Prepárate para desafiar a otros equipos y convertirte en el campeón!</p>
-                    <p>Aquí podrás registrarte para participar en los torneos y ver los equipos que compiten.</p>
+                    <h2>Bienvenidos</h2>
+                    <p class="text-center">
+                        Aquí podrás registrarte para participar en los torneos y ver los equipos que compiten.
+                    </p>
                 </div>
             </div>
 
@@ -57,7 +89,7 @@
             <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
                 <div class="mt-4">
                     <h2>Registro de Equipos</h2>
-                    <form id="registerForm" class="bg-black p-4 rounded shadow-sm">
+                    <form id="registerForm">
                         <div class="mb-3">
                             <label for="teamName" class="form-label">Nombre del Equipo:</label>
                             <input type="text" class="form-control" id="teamName" name="teamName" required>
@@ -96,7 +128,6 @@
 
     <!-- Script de interactividad -->
     <script>
-        // Manejo del formulario para registrar un equipo
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -115,31 +146,7 @@
             const message = await response.text();
             document.getElementById('message').textContent = message;
 
-            // Opcional: Reiniciar el formulario después de enviar
             document.getElementById('registerForm').reset();
-        });
-
-        // Función para obtener y mostrar los equipos registrados
-        async function getTeams() {
-            const response = await fetch('http://localhost:5000/teams');
-            const teams = await response.json();
-            const teamsList = document.getElementById('teamsList');
-            teamsList.innerHTML = '';  // Limpiar la lista antes de agregar nuevos equipos
-
-            teams.forEach(team => {
-                const listItem = document.createElement('li');
-                listItem.classList.add('list-group-item');
-                listItem.textContent = `${team.teamName} (Capitán: ${team.captain})`;
-                teamsList.appendChild(listItem);
-            });
-        }
-
-    
-
-            // Si se va a mostrar la lista de equipos, actualizarla
-            if (teamsView.style.display === 'block') {
-                getTeams();
-            }
         });
     </script>
 </body>
